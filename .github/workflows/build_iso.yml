@@ -1,0 +1,49 @@
+name: Alpine ISO Builder
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  build_ISOs:
+    runs-on: ubuntu-20.04
+    container:
+      image: alpine:latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install software
+        run: |
+          apk update
+          apk upgrade
+          apk --no-cache add alpine-sdk build-base apk-tools alpine-conf \
+              busybox fakeroot syslinux xorriso squashfs-tools sudo mtools \
+              dosfstools grub-efi
+
+      - name: Download aports
+        run: git clone --single-branch https://git.alpinelinux.org/aports
+
+      - name: Configure build keys
+        run: echo | abuild-keygen -i -a
+
+      - name: Make ISO (v3.14)
+        run: |
+          chmod +x *.sh
+          mv *.sh aports/scripts/
+
+          aports/scripts/mkimage.sh \
+              --tag v3.14 \
+              --arch x86_64 \
+              --profile docker \
+              --outdir . \
+              --repository https://dl-cdn.alpinelinux.org/alpine/v3.14/main \
+              --repository https://dl-cdn.alpinelinux.org/alpine/v3.14/community
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            *.iso
