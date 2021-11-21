@@ -70,7 +70,6 @@ makefile root:root 0744 "$tmp"/etc/local.d/set_bash.start <<EOF
 sed -i 's|root:/bin/ash|root:/bin/bash|' /etc/passwd
 EOF
 
-mkdir -p "$tmp"/etc/local.d
 makefile root:root 0744 "$tmp"/etc/local.d/add_user.start <<EOF
 #!/bin/ash
 user="linux"

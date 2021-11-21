@@ -23,7 +23,7 @@ jobs:
               dosfstools grub-efi
 
       - name: Download aports
-        run: git clone --single-branch https://git.alpinelinux.org/aports
+        run: git clone --single-branch https://gitlab.alpinelinux.org/alpine/aports.git
 
       - name: Configure build keys
         run: echo | abuild-keygen -i -a
