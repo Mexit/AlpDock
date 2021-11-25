@@ -1,3 +1,6 @@
+env:
+  version: v3.15
+
 name: Alpine ISO Builder
 
 on:
@@ -28,18 +31,18 @@ jobs:
       - name: Configure build keys
         run: echo | abuild-keygen -i -a
 
-      - name: Make ISO (v3.15)
+      - name: Make ISO (${version})
         run: |
           chmod +x *.sh
           mv *.sh aports/scripts/
 
           aports/scripts/mkimage.sh \
-              --tag v3.14 \
+              --tag ${version} \
               --arch x86_64 \
               --profile docker \
               --outdir . \
-              --repository https://dl-cdn.alpinelinux.org/alpine/v3.15/main \
-              --repository https://dl-cdn.alpinelinux.org/alpine/v3.15/community
+              --repository https://dl-cdn.alpinelinux.org/alpine/${version}/main \
+              --repository https://dl-cdn.alpinelinux.org/alpine/${version}/community
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
