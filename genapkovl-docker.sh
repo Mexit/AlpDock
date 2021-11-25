@@ -60,8 +60,8 @@ util-linux
 EOF
 
 makefile root:root 0644 "$tmp"/etc/apk/repositories <<EOF
-https://dl-cdn.alpinelinux.org/alpine/v3.14/main
-https://dl-cdn.alpinelinux.org/alpine/v3.14/community
+https://dl-cdn.alpinelinux.org/alpine/v3.15/main
+https://dl-cdn.alpinelinux.org/alpine/v3.15/community
 EOF
 
 mkdir -p "$tmp"/etc/local.d

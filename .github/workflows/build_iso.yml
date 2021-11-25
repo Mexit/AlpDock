@@ -28,7 +28,7 @@ jobs:
       - name: Configure build keys
         run: echo | abuild-keygen -i -a
 
-      - name: Make ISO (v3.14)
+      - name: Make ISO (v3.15)
         run: |
           chmod +x *.sh
           mv *.sh aports/scripts/
@@ -38,8 +38,8 @@ jobs:
               --arch x86_64 \
               --profile docker \
               --outdir . \
-              --repository https://dl-cdn.alpinelinux.org/alpine/v3.14/main \
-              --repository https://dl-cdn.alpinelinux.org/alpine/v3.14/community
+              --repository https://dl-cdn.alpinelinux.org/alpine/v3.15/main \
+              --repository https://dl-cdn.alpinelinux.org/alpine/v3.15/community
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
