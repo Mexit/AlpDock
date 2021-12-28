@@ -31,7 +31,7 @@ jobs:
       - name: Configure build keys
         run: echo | abuild-keygen -i -a
 
-      - name: Make ISO (${version})
+      - name: Make ISO (${{ env.version }})
         run: |
           chmod +x *.sh
           mv *.sh aports/scripts/
