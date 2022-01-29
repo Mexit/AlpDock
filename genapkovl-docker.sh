@@ -50,6 +50,7 @@ docker
 docker-bash-completion
 docker-compose
 docker-compose-bash-completion
+docker-cli-compose
 findutils
 openssh
 procps
