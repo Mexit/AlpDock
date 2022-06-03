@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+version="v3.16"
+
 HOSTNAME="$1"
 if [ -z "$HOSTNAME" ]; then
 	echo "usage: $0 hostname"
@@ -61,8 +63,8 @@ util-linux
 EOF
 
 makefile root:root 0644 "$tmp"/etc/apk/repositories <<EOF
-https://dl-cdn.alpinelinux.org/alpine/v3.15/main
-https://dl-cdn.alpinelinux.org/alpine/v3.15/community
+https://dl-cdn.alpinelinux.org/alpine/${version}/main
+https://dl-cdn.alpinelinux.org/alpine/${version}/community
 EOF
 
 mkdir -p "$tmp"/etc/local.d
