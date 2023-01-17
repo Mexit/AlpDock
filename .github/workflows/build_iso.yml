@@ -15,7 +15,7 @@ jobs:
       image: alpine:3.17
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install software
         run: |
