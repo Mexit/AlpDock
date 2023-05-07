@@ -81,6 +81,22 @@ mkdir /etc/sudoers.d
 echo "\$user ALL=(ALL) ALL" > /etc/sudoers.d/\$user && chmod 0440 /etc/sudoers.d/\$user
 EOF
 
+mkdir -p "$tmp"/usr/bin
+makefile root:root 0755 "$tmp"/usr/bin/alpdock-run-portainer <<EOF
+#!/bin/sh
+
+docker volume create portainer_data
+docker run \
+	--detach \
+	--volume=/var/run/docker.sock:/var/run/docker.sock \
+	--volume=portainer_data:/data \
+	--publish=8000:8000 \
+	--publish=9443:9443 \
+	--restart=always \
+	--name=portainer \
+	portainer/portainer-ce:latest
+EOF
+
 rc_add devfs sysinit
 rc_add dmesg sysinit
 rc_add mdev sysinit
