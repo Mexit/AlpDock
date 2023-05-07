@@ -119,4 +119,4 @@ rc_add mount-ro shutdown
 rc_add killprocs shutdown
 rc_add savecache shutdown
 
-tar -c -C "$tmp" etc | gzip -9n > $HOSTNAME.apkovl.tar.gz
+tar -c -C "$tmp" etc usr| gzip -9n > $HOSTNAME.apkovl.tar.gz
