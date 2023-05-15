@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-version="v3.17"
+version="v3.18"
 
 HOSTNAME="$1"
 if [ -z "$HOSTNAME" ]; then
@@ -50,8 +50,6 @@ bash-completion
 coreutils
 docker
 docker-bash-completion
-docker-compose
-docker-compose-bash-completion
 docker-cli-compose
 findutils
 openssh

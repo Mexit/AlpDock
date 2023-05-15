@@ -1,5 +1,5 @@
 env:
-  version: v3.17
+  version: v3.18
 
 name: Alpine ISO Builder
 
@@ -12,7 +12,7 @@ jobs:
   build_ISOs:
     runs-on: ubuntu-22.04
     container:
-      image: alpine:3.17
+      image: alpine:3.18
 
     steps:
       - uses: actions/checkout@v3
