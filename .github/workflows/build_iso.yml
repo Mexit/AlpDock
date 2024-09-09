@@ -35,8 +35,9 @@ jobs:
         run: |
           chmod +x *.sh
           mv *.sh aports/scripts/
+          cd aports/scripts/
 
-          aports/scripts/mkimage.sh \
+          ./mkimage.sh \
               --tag ${version} \
               --arch x86_64 \
               --profile docker \
