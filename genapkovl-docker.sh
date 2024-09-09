@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-version="v3.20"
+alpinelinux="v3.20.3"
+version="${alpinelinux%.*}"
 
 HOSTNAME="$1"
 if [ -z "$HOSTNAME" ]; then
