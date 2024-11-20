@@ -10,13 +10,11 @@ on:
 
 jobs:
   build_ISOs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     container:
       image: alpine:3.20
 
     steps:
-      - uses: actions/checkout@v4
-
       - name: Install software
         run: |
           apk update
@@ -24,6 +22,10 @@ jobs:
           apk --no-cache add alpine-sdk build-base apk-tools alpine-conf \
               busybox fakeroot syslinux xorriso squashfs-tools sudo mtools \
               dosfstools grub-efi
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Download aports
         run: git clone --depth=1 https://gitlab.alpinelinux.org/alpine/aports.git
@@ -45,9 +47,32 @@ jobs:
               --repository https://dl-cdn.alpinelinux.org/alpine/${version}/main \
               --repository https://dl-cdn.alpinelinux.org/alpine/${version}/community
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Upload files
+        uses: actions/upload-artifact@v4
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
+          name: files
+          path: .
+          include-hidden-files: true
+
+  release_ISOs:
+    runs-on: ubuntu-24.04
+    needs: build_ISOs
+    steps:
+      - name: Download files
+        uses: actions/download-artifact@v4
+        with:
+          name: files
+
+      - name: Release AlpDock ISO
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo -e "Changelog\n---------" > changelog.txt
+          git log --reverse --pretty=format:"%h %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> changelog.txt
+
+          gh release create ${{ github.ref_name }} \
+            --verify-tag \
+            --latest \
+            --draft \
+            --notes-file changelog.txt \
             *.iso
