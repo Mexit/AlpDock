@@ -14,6 +14,6 @@ To configure other interfaces run `setup-interfaces` and then `service networkin
 By default, it is not possible to log into the root account via ssh: use `linux` account (pass: `linux`)
 
 ### Portainer
-Type 'alpdock-run-portainer' to run Portainer.  
+Type `alpdock-run-portainer` to run Portainer.  
 You can log into your Portainer Server by opening a web browser and going to:  
 https://localhost:9443 (Replace localhost with the relevant IP address)
