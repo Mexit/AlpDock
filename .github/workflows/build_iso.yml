@@ -1,18 +1,16 @@
 env:
-  version: v3.20
+  version: v3.21
 
 name: Alpine ISO Builder
 
 on:
   push:
-    tags:
-    - 'v*'
 
 jobs:
   build_ISOs:
     runs-on: ubuntu-24.04
     container:
-      image: alpine:3.20
+      image: alpine:3.21
 
     steps:
       - name: Install software
@@ -55,6 +53,7 @@ jobs:
           include-hidden-files: true
 
   release_ISOs:
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-24.04
     needs: build_ISOs
     steps:
@@ -73,6 +72,5 @@ jobs:
           gh release create ${{ github.ref_name }} \
             --verify-tag \
             --latest \
-            --draft \
             --notes-file changelog.txt \
             *.iso

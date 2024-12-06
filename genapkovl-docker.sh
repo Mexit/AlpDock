@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-alpinelinux="v3.20.3"
+alpinelinux="v3.21.0"
 version="${alpinelinux%.*}"
 
 HOSTNAME="$1"
