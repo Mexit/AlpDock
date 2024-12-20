@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-alpinelinux="v3.21.0"
-version="${alpinelinux%.*}"
+version="3.21"
 
 HOSTNAME="$1"
 if [ -z "$HOSTNAME" ]; then
@@ -62,8 +61,8 @@ util-linux
 EOF
 
 makefile root:root 0644 "$tmp"/etc/apk/repositories <<EOF
-https://dl-cdn.alpinelinux.org/alpine/${version}/main
-https://dl-cdn.alpinelinux.org/alpine/${version}/community
+https://dl-cdn.alpinelinux.org/alpine/v${version}/main
+https://dl-cdn.alpinelinux.org/alpine/v${version}/community
 EOF
 
 mkdir -p "$tmp"/etc/local.d

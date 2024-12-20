@@ -11,4 +11,5 @@ profile_docker() {
 		docker docker-bash-completion docker-cli-compose \
 		bash-completion procps util-linux readline findutils sed coreutils sudo e2fsprogs lvm2"
 	apkovl="genapkovl-docker.sh"
+	hostname="alpdock"
 }
