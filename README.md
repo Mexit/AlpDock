@@ -1,7 +1,7 @@
 # AlpDock
-Alpine Linux with docker preinstalled (Live Image)
+Alpine Linux with `docker` and `podman` preinstalled (Live Images)
 
-AlpDock includes only minimum amount of software needed to run Docker and SSH server.
+AlpDock includes only minimum amount of software needed to run Docker, Podman and SSH server.
 
 ### Root account
 The root account does not have a password. To set it, type `passwd`.
