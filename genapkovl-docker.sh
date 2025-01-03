@@ -34,6 +34,17 @@ makefile root:root 0644 "$tmp"/etc/hostname <<EOF
 $HOSTNAME
 EOF
 
+makefile root:root 0644 "$tmp"/etc/motd <<EOF
+
+Welcome to Alpine with docker preinstalled (Live ISO)!
+
+DHCP is enabled on eth0.
+To configure other interfaces run 'setup-interfaces' and then 'service networking restart' to apply settings.
+
+Type 'alpdock-run-portainer' to run Portainer.
+
+EOF
+
 mkdir -p "$tmp"/etc/network
 makefile root:root 0644 "$tmp"/etc/network/interfaces <<EOF
 auto lo
