@@ -71,8 +71,11 @@ jobs:
           commits="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$(git tag --sort=-v:refname | sed -n 2p)...$(git tag --sort=-v:refname | sed -n 1p)"
           echo -e "<br>\n\n**Full Changelog**: $commits" >> changelog.txt
 
+          sha256sum *.iso > sha256sums.txt
+
           gh release create ${{ github.ref_name }} \
+            --title ${{ github.ref_name }} \
             --verify-tag \
             --latest \
             --notes-file changelog.txt \
-            *.iso
+            *.iso sha256sums.txt
