@@ -66,10 +66,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           git config --global --add safe.directory .
-          echo "### Main changes:" > changelog.txt
-          git log --reverse --pretty=format:"- %h: %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD | egrep -v 'fix:|minor:|typo:' >> changelog.txt
-          commits="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$(git tag --sort=-v:refname | sed -n 2p)...$(git tag --sort=-v:refname | sed -n 1p)"
-          echo -e "<br>\n\n**Full Changelog**: $commits" >> changelog.txt
+          git fetch --tags --force
+          if git cat-file -t ${{ github.ref_name }} | grep -q '^tag$'; then
+            git tag -n ${{ github.ref_name }} --format="### %(subject)" > changelog.txt
+          else
+            echo "### Main changes:" > changelog.txt
+            git log --reverse --pretty=format:"- %h: %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD | egrep -v 'fix:|minor:|typo:' >> changelog.txt
+            commits="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$(git tag --sort=-v:refname | sed -n 2p)...$(git tag --sort=-v:refname | sed -n 1p)"
+            echo -e "<br>\n\n**Full Changelog**: $commits" >> changelog.txt
+          fi
 
           sha256sum *.iso > sha256sums.txt
 
