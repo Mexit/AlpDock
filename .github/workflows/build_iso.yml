@@ -25,6 +25,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch missing git tags
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        run: |
+          git config --global --add safe.directory .
+          git fetch --tags --force
+
       - name: Download aports
         run: git clone --depth=1 https://gitlab.alpinelinux.org/alpine/aports.git
 
@@ -65,8 +71,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git config --global --add safe.directory .
-          git fetch --tags --force
           if git cat-file -t ${{ github.ref_name }} | grep -q '^tag$'; then
             git tag -n ${{ github.ref_name }} --format="### %(subject)" > changelog.txt
           else
