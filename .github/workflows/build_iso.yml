@@ -1,5 +1,5 @@
 env:
-  version: 3.21
+  version: 3.22
 
 name: Alpine ISO Builder
 
@@ -10,7 +10,7 @@ jobs:
   build_ISOs:
     runs-on: ubuntu-24.04
     container:
-      image: alpine:3.21
+      image: alpine:3.22
 
     steps:
       - name: Install software
@@ -39,7 +39,7 @@ jobs:
 
       - name: Make ISO
         run: |
-          chmod +x *.sh
+          chmod +x genapkovl-*.sh
           cp *.sh aports/scripts/
           cd aports/scripts/
 

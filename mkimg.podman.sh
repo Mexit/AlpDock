@@ -8,7 +8,7 @@ profile_podman() {
 	output_format="iso"
 	kernel_addons="xtables-addons"
 	apks="$apks \
-		podman \
+		podman iptables \
 		bash-completion procps util-linux readline findutils sed coreutils sudo e2fsprogs lvm2"
 	apkovl="genapkovl-podman.sh"
 	hostname="alpdock"

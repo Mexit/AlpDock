@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-version="3.21"
+version="3.22"
 
 HOSTNAME="$1"
 if [ -z "$HOSTNAME" ]; then
@@ -59,9 +59,10 @@ makefile root:root 0644 "$tmp"/etc/apk/world <<EOF
 alpine-base
 bash-completion
 coreutils
-podman
 findutils
+iptables
 openssh
+podman
 procps
 readline
 sed

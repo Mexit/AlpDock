@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-version="3.21"
+version="3.22"
 
 HOSTNAME="$1"
 if [ -z "$HOSTNAME" ]; then
