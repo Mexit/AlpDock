@@ -21,7 +21,7 @@ jobs:
               busybox fakeroot syslinux xorriso squashfs-tools sudo mtools \
               dosfstools grub-efi github-cli
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
