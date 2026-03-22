@@ -43,6 +43,9 @@ jobs:
           cp *.sh aports/scripts/
           cd aports/scripts/
 
+          # Fix mkimage.sh (https://gitlab.alpinelinux.org/alpine/aports/-/issues/17946)
+          sed -i 's/--no-chown//' mkimage.sh
+
           ./mkimage.sh \
               --tag ${version}-$(date +%y%m%d) \
               --arch x86_64 \
