@@ -1,5 +1,5 @@
 env:
-  version: 3.23
+  version: 3.24
 
 name: Alpine ISO Builder
 
@@ -10,7 +10,7 @@ jobs:
   build_ISOs:
     runs-on: ubuntu-24.04
     container:
-      image: alpine:3.23
+      image: alpine:3.24
 
     steps:
       - name: Install software
