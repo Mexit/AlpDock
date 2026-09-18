@@ -32,7 +32,7 @@ jobs:
           git fetch --tags --force
 
       - name: Download aports
-        run: git clone --depth=1 https://gitlab.alpinelinux.org/alpine/aports.git
+        run: git clone --depth=1 https://github.com/alpinelinux/aports.git
 
       - name: Configure build keys
         run: echo | abuild-keygen -i -a
